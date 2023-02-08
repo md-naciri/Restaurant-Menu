@@ -1,0 +1,1 @@
+<img src="{{asset('logo/RestauLogo3.png')}}" width="250px" class="mx-auto" alt="">

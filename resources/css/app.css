@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.foodback{
+    background-image: url("../img/background/foodreg.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.welback{
+    background-image: url("../img/background/foodreg5.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.bluring{
+    background-color: #ddd5 !important;
+    backdrop-filter: blur(5px) !important;
+    border: 1px solid #eee9 ;
+}
+.welbluring{
+    background-color: rgba(31,41,55,0.7) !important;
+    backdrop-filter: blur(5px) !important;
+    border: 1px solid #eee3 ;
+}
+.bluring input{
+    background-color: #eee9 !important;
+}
+.menu-card .image img {
+    width: 80%;
+    border-radius: 5px;
+    height: 200px;
+    object-fit: cover;
+}
+.menu-card h4 {
+    /* position: relative; */
+    text-transform: capitalize;
+    color: #eee;
+} 
+.menu-card .desc {
+    /* position: relative; */
+    color: #eee9;
+}  
+/* .cards-container{
+    background-color: #e4c590 !important;
+} */
+  
