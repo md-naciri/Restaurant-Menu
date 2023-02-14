@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDishRequest;
 use App\Models\Dish;
 use Illuminate\Http\Request;
+use App\Models\DayMenu;
 
 class DishController extends Controller
 {
@@ -14,14 +16,16 @@ class DishController extends Controller
      */
     public function index()
     {
-        $data = Dish::all();
-        return view('dashboard',['data'=>$data]);
+        $data = Dish::paginate(5);
+        $day = DayMenu::All();
+        return view('dashboard',['data'=>$data],['menu'=>$day]);
     }
     
     public function welcome()
     {
         $data = Dish::all();
-        return view('welcome',['data'=>$data]);
+        $data1 = DayMenu::all();
+        return view('welcome',['data'=>$data],['menu'=>$data1]);
     }
 
     /**
@@ -40,7 +44,7 @@ class DishController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDishRequest $request)
     {
         $input = $request->all();
         if ($image = $request->file('photo')) {
@@ -70,9 +74,10 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dish $dish)
+    public function edit($id)
     {
-        //
+        $data = Dish::find($id);
+        return view('edit', ['data'=>$data]);
     }
 
     /**
@@ -82,9 +87,38 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request, $id)
     {
-        //
+        $dish = Dish::findOrFail($id);
+        $input = $request->all();
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['photo'] = "$profileImage";
+        }
+        // else{
+        //     unset($input['photo']);
+        // }
+        $dish->update($input);
+        return redirect()->route('dashboard');
+
+
+
+
+        // $food = Food::find($food);
+        // $input = $request->all();
+        // if ($image = $request->file('image')) {
+        //     $destinationPath = 'images/';
+        //     $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        //     $image->move($destinationPath, $profileImage);
+        //     $input['image'] = "$profileImage";
+        // }else{
+        //     unset($input['image']);
+        // }
+        // $food->update($input);
+
+        // return redirect('admin');
     }
 
     /**
@@ -96,6 +130,24 @@ class DishController extends Controller
     public function destroy($id)
     {
         Dish::destroy($id);
+        return redirect()->route('dashboard');
+    }
+
+    public function editMenu()
+    {
+        $day = DayMenu::All();
+        $data = Dish::All();
+        return view('menu', ['data'=>$data], ['menu'=>$day]);
+    }
+
+    public function updateMenu(Request $request){
+        
+        $array_menu = $request["menu"];
+        $day = $request["day"];
+        $menu = join(", ",$array_menu);
+        
+        $test = DayMenu::findOrFail($day);
+        $test->where('id', $day)->update(array('menu' => "$menu"));
         return redirect()->route('dashboard');
     }
 }

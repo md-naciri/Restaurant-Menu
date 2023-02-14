@@ -91,7 +91,15 @@
                 </div>
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg p-3 cards-container welbluring">
                     <div class="grid grid-cols-12 gap-4 ">
+                        @foreach ($menu as $item)
                         <div class="col-span-4 m-4 border border-orange-100 rounded text-center text-white">
+                            {{$item->day}}
+                        </div>
+                        <div class="px-2 col-span-8 m-4 border border-orange-100 rounded text-white">
+                            {{$item->menu}}
+                        </div>
+                        @endforeach
+                        {{-- <div class="col-span-4 m-4 border border-orange-100 rounded text-center text-white">
                             Day
                         </div>
                         <div class="col-span-8 m-4 border border-orange-100 rounded text-white">
@@ -102,13 +110,7 @@
                         </div>
                         <div class="col-span-8 m-4 border border-orange-100 rounded text-white">
                             Dish
-                        </div>
-                        <div class="col-span-4 m-4 border border-orange-100 rounded text-center text-white">
-                            Day
-                        </div>
-                        <div class="col-span-8 m-4 border border-orange-100 rounded text-white">
-                            Dish
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="flex justify-center mt-4 sm:items-center">

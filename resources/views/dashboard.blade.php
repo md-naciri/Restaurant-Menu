@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -33,7 +33,7 @@
                                         Description
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-right">
-                                        <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 text-center"><a href="{{route('create')}}">Add</a></button>
+                                        <a href="{{route('create')}}"><button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 text-center">Add</button></a>
                                     </th>
                                 </tr>
                             </thead>
@@ -53,16 +53,64 @@
                                         {{$dish->desc}}
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="#" class="font-medium text-blue-600 mr-4  hover:underline">Edit</a>
+                                        <a href="{{route('edit', $dish->id)}}" class="font-medium text-blue-600 mr-4  hover:underline">Edit</a>
                                         <a href="{{route('delete', $dish->id)}}" class="font-medium text-rose-600  hover:underline">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="ml-3">{{$data->links()}}</div>
                     </div>
-                    
+                </div>
+            </div>
+        </div>
+    </div>
 
+
+
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="text-gray-900">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm text-left text-gray-500 ">
+                            <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white">
+                                Our Daily Menu at RestauCode
+                                <p class="mt-1 text-sm font-normal text-gray-500 ">Discover a selection of dishes at RestauCode, created to tantalize your taste buds and provide you with a memorable dining experience. Enjoy a range of flavors and textures, expertly crafted by our chefs to bring you the best in cuisine.</p>
+                            </caption>
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Days
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Menu
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-right">
+                                        <a href="{{route('menu')}}"><button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 text-center">Create Menu</button></a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($menu as $item)
+                                <tr class="bg-white border-b ">
+                                    <td class="px-6 py-4">
+                                        {{$item->day}}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{$item->menu}}
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        {{-- <a href="" class="font-medium text-blue-600 mr-4  hover:underline">Edit</a>
+                                        <a href="" class="font-medium text-rose-600  hover:underline">Delete</a> --}}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{-- <div class="ml-3">{{$data->links()}}</div> --}}
+                    </div>
                 </div>
             </div>
         </div>
