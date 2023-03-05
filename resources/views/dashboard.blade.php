@@ -49,7 +49,7 @@
                                         <img src="/images/{{$dish->photo}}" width="75px" alt="">
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$dish->categories->name ?? ''}}
+                                        {{$dish->categories->name ?? 'No category'}}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{$dish->name}}
